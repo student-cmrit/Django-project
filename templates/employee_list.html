@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Employee List</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+    
+   
+            <!-- Logo -->
+            <div class="logo-container  ">
+                <img src="{% static 'images/emp.png' %}" alt="Logo" class="logo-img">
+            </div>
+       
+<br>
+    <!-- Success Message Pop-up (This is hidden by default) -->
+    <div id="success-message" class="alert alert-success alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x z-index-10"
+        style="display: none; width: 80%; margin-top: 10px;" role="alert">
+        <strong>Success!</strong> <span id="success-text"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" onclick="hideSuccessMessage()"></button>
+    </div>
+
+    <div class="container mt-5">
+        <!-- Back Arrow Link -->
+        <a href="{% url 'home' %}" class="btn btn-secondary mb-4">
+            <i class="bi bi-arrow-left-circle"></i> Back to Home
+        </a>
+
+        <h2>Employee List</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Gender</th>
+                    <th>Designation</th>
+                    <th>Course</th>
+                    <th>Profile Image</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee in employees %}
+                <tr>
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.email }}</td>
+                    <td>{{ employee.mobile }}</td>
+                    <td>{{ employee.get_gender_display }}</td>
+                    <td>{{ employee.designation }}</td>
+                    <td>{{ employee.course }}</td>
+                    <td>
+                        {% if employee.profile_image %}
+                        <img src="{{ employee.profile_image.url }}" alt="Profile Image"
+                            style="width: 50px; height: 50px;">
+                        {% else %}
+                        No Image
+                        {% endif %}
+                    </td>
+                    <td>
+                        <!-- Edit button -->
+                        <a href="{% url 'edit_employee' employee.id %}" class="btn btn-warning">Edit</a>
+                        <!-- Delete button (wrapped in a form to use POST request) -->
+                        <form action="{% url 'delete_employee' employee.id %}" method="POST" style="display:inline;" onsubmit="return confirmDelete();">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS (Optional, for interactive components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript for success pop-up -->
+    <script>
+        // Function to show the success message
+        function showSuccessMessage(message) {
+            var successMessage = document.getElementById("success-message");
+            var successText = document.getElementById("success-text");
+            successText.textContent = message;
+            successMessage.style.display = "block";
+
+            // Hide the message after 3 seconds
+            setTimeout(function() {
+                successMessage.style.display = "none";
+            }, 3000);
+        }
+
+        // Function to hide the success message
+        function hideSuccessMessage() {
+            var successMessage = document.getElementById("success-message");
+            successMessage.style.display = "none";
+        }
+
+        // Confirm delete action
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this employee?");
+        }
+
+        // Simulating a success message for demonstration (can be triggered on successful delete or update)
+        {% if messages %}
+            {% for message in messages %}
+                showSuccessMessage("{{ message }}");
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+
+</html>

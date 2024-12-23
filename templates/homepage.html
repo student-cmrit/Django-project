@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Home</title>
+        {% load static %}
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-KyZXEJx3WvCz1d5l6c0p6tV5tvVbI1iF1k0gg5FEkHgnb66lM8s5o33Bvhkdf3K1" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+    </head>
+
+    <body class="bg-light">
+        <!-- Header with Logo and Buttons -->
+        <header class="container-fluid p-3 bg-dark text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <img src="{% static 'images/emp.png' %}" alt="Logo" class="logo-img">
+                </div>
+
+                <!-- Header Buttons -->
+                <div class="d-flex" style="margin-left: 5rem;">
+                    <a href="{% url 'create_employee' %}" class="btn btn-primary me-3">Create Employee</a>
+                    <a href="{% url 'employee_list' %}" class="btn btn-info me-3">Employee List</a>
+                    <!-- Logout Button moved to rightmost position -->
+                <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>
+                </div>
+            </div>
+        </header>
+
+        <!-- Page Content (e.g., Dashboard or Welcome Message) -->
+        <div class="container mt-5">
+            <h2>Welcome to the Employee Management System</h2>
+            <p>Use the buttons above to manage employee records.</p>
+        </div>
+
+        <!-- Bootstrap JS (Optional, for interactive components) -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-6p/0A58a13Y5cp6f8p1zLwF62v+M1LBk0ihhSgs9uApseMb7HgF32y0Mv/r84ifD"
+            crossorigin="anonymous"></script>
+    </body>
+
+</html>

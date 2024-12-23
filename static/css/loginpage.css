@@ -1,0 +1,143 @@
+/* loginpage.css */
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    /* Light background for the entire page */
+    position: relative;
+    /* To position the logo in the top left */
+}
+
+/* Logo Container - Positioned at the top left */
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Logo Image Styling */
+.logo-img {
+    width: 60px;
+    /* Size of the logo */
+    height: 60px;
+    border-radius: 50%;
+    /* Makes the image round */
+    object-fit: cover;
+    /* Ensures the image is not stretched */
+    border: 3px solid #007bff;
+    /* Adds a border around the logo */
+}
+
+/* Login Container */
+.login-container {
+    margin-left: 30%;
+    align-items: center;
+    width: 100%;
+    /* Full width inside container */
+    max-width: 400px;
+    /* Max width for the login card */
+    height: auto;
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styling */
+h2 {
+    font-size: 2rem;
+    /* Make the title size larger */
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Input Fields Styling */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    /* Full width */
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #f9f9f9;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+/* Button Styling */
+button[type="submit"] {
+    font-size: 16px;
+    padding: 12px;
+    width: 100%;
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Register Link Styling */
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Error Message Styling */
+.alert {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* Responsive Styling */
+@media (max-width: 576px) {
+    .login-container {
+        width: 90%;
+        /* Adjust width for smaller screens */
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        /* Smaller title for mobile */
+    }
+
+    button[type="submit"] {
+        font-size: 14px;
+        /* Smaller button text */
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        font-size: 14px;
+        /* Smaller input text */
+    }
+
+    .alert {
+        font-size: 12px;
+        /* Smaller error messages */
+    }
+
+    p {
+        font-size: 1rem;
+        /* Adjust text for mobile */
+    }
+}
